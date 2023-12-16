@@ -47,7 +47,7 @@ Para desplegar los contenedores en kubernetes deberiamos seguir los siguientes p
 
 - __Crear un namespace__
 
-´´´
+´´´bash
 kubectl create namespace n5-namesapace
 
 - __Crear los secretes__
