@@ -1,0 +1,411 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/pablocampo/code/challengeN5-solution/n5.Tests/n5.Tests.csproj": {}
+  },
+  "projects": {
+    "/Users/pablocampo/code/challengeN5-solution/n5.Application/n5.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/pablocampo/code/challengeN5-solution/n5.Application/n5.Application.csproj",
+        "projectName": "n5.Application",
+        "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.Application/n5.Application.csproj",
+        "packagesPath": "/Users/pablocampo/.nuget/packages/",
+        "outputPath": "/Users/pablocampo/code/challengeN5-solution/n5.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/pablocampo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "/Users/pablocampo/code/challengeN5-solution/n5.Infrastructure/n5.Infrastructure.csproj": {
+                "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.Infrastructure/n5.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.8.1, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.311/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/pablocampo/code/challengeN5-solution/n5.core/n5.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/pablocampo/code/challengeN5-solution/n5.core/n5.Core.csproj",
+        "projectName": "n5.Core",
+        "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.core/n5.Core.csproj",
+        "packagesPath": "/Users/pablocampo/.nuget/packages/",
+        "outputPath": "/Users/pablocampo/code/challengeN5-solution/n5.core/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/pablocampo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.311/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/pablocampo/code/challengeN5-solution/n5.Infrastructure/n5.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/pablocampo/code/challengeN5-solution/n5.Infrastructure/n5.Infrastructure.csproj",
+        "projectName": "n5.Infrastructure",
+        "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.Infrastructure/n5.Infrastructure.csproj",
+        "packagesPath": "/Users/pablocampo/.nuget/packages/",
+        "outputPath": "/Users/pablocampo/code/challengeN5-solution/n5.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/pablocampo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Confluent.Kafka": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
+            "Elasticsearch.Net": {
+              "target": "Package",
+              "version": "[7.16.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "NEST": {
+              "target": "Package",
+              "version": "[7.16.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.311/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/pablocampo/code/challengeN5-solution/n5.Tests/n5.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/pablocampo/code/challengeN5-solution/n5.Tests/n5.Tests.csproj",
+        "projectName": "n5.Tests",
+        "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.Tests/n5.Tests.csproj",
+        "packagesPath": "/Users/pablocampo/.nuget/packages/",
+        "outputPath": "/Users/pablocampo/code/challengeN5-solution/n5.Tests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/pablocampo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "/Users/pablocampo/code/challengeN5-solution/n5.Application/n5.Application.csproj": {
+                "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.Application/n5.Application.csproj"
+              },
+              "/Users/pablocampo/code/challengeN5-solution/n5.core/n5.Core.csproj": {
+                "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.core/n5.Core.csproj"
+              },
+              "/Users/pablocampo/code/challengeN5-solution/n5.Infrastructure/n5.Infrastructure.csproj": {
+                "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.Infrastructure/n5.Infrastructure.csproj"
+              },
+              "/Users/pablocampo/code/challengeN5-solution/n5.WebApi/n5.WebApi.csproj": {
+                "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.WebApi/n5.WebApi.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.5.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.70, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.2.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.6.3, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.311/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/pablocampo/code/challengeN5-solution/n5.WebApi/n5.WebApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/pablocampo/code/challengeN5-solution/n5.WebApi/n5.WebApi.csproj",
+        "projectName": "n5.WebApi",
+        "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.WebApi/n5.WebApi.csproj",
+        "packagesPath": "/Users/pablocampo/.nuget/packages/",
+        "outputPath": "/Users/pablocampo/code/challengeN5-solution/n5.WebApi/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/pablocampo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
+          "/usr/local/share/dotnet/sdk/7.0.311/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "/Users/pablocampo/code/challengeN5-solution/n5.Application/n5.Application.csproj": {
+                "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.Application/n5.Application.csproj"
+              },
+              "/Users/pablocampo/code/challengeN5-solution/n5.core/n5.Core.csproj": {
+                "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.core/n5.Core.csproj"
+              },
+              "/Users/pablocampo/code/challengeN5-solution/n5.Infrastructure/n5.Infrastructure.csproj": {
+                "projectPath": "/Users/pablocampo/code/challengeN5-solution/n5.Infrastructure/n5.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Confluent.Kafka": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.11, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Serilog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.311/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

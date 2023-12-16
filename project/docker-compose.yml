@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+
+  sqlserver:
+    image: 'mcr.microsoft.com/mssql/server:2019-latest'
+    ports:
+      - "1433:1433"
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: "Challenge!2023"
+      MSSQL_PID: Developer
+    volumes:
+      - ./db-data/sqlserver/:/var/opt/mssql/data/
+
+  challenge-n5:
+    build:
+      context: ../
+      dockerfile: ./Dockerfile
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+    ports:
+      - "5256:80"
+    environment:
+      - DBServer=sqlserver
+      - DBName=Challenge
+      - DBUser=sa
+      - DBPassword=Challenge!2023
+   
+
+  elastic-search:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
+    container_name: es01
+    environment:
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+      - discovery.seed_hosts=es01
+      - cluster.initial_master_nodes=es01
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./db-data/elastic/:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    restart: always
+
+  kafka:
+    image: docker.io/bitnami/kafka:3.6
+    ports:
+      - "9092:9092"
+    volumes:
+      - ./db-data/kafka/:/bitnami
+    environment:
+      # KRaft settings
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      # Listeners
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT   
