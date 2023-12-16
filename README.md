@@ -24,6 +24,7 @@ Este proyecto incorpora la implementación de Docker para facilitar su despliegu
 __a) Dockerfile__
 
 El archivo Dockerfile empaqueta la solución .NET en una imagen Docker, proporcionando un entorno consistente para la ejecución de la aplicación.
+
 __b) dockercompose.yaml__
 
 En la carpeta "project", encontrarás un archivo docker-compose.yaml diseñado para definir todos los servicios necesarios para un despliegue efectivo del proyecto en entornos de desarrollo. Este archivo de composición define los siguientes servicios:
@@ -42,5 +43,13 @@ Se ha implementado un Makefile para dinamizar aún más el proceso de gestión d
 - __up_kafka:__ Levanta únicamente el servicio de Kafka.
 
 ## Hablemos de Kubernetes
+Para desplegar los contenedores en kubernetes deberiamos seguir los siguientes pasos
+
+- __Crear un namespace__
+
+´´´kubectl create namespace n5-namesapace
+
+- __Crear los secretes__
+
 
 
