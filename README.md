@@ -52,5 +52,257 @@ kubectl create namespace n5-namesapace
 ```
 - __Crear los secretes__
 
+```bash
+kubectl create secret generic sqlserver-secret --from-literal=PASS=Challenge!N5
+```
+- __Crear el ConfigMap__
+```bash
+kubectl create configmap sqlserver-configmap --from-literal==DBNAME=challengeN5 --from-literal=SERVER=sql-service --from-literal=USER=sa
+```
+- __Creamos el servicio de SQL Server__
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqlserver
+  namespace: n5-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sqlserver
+  template:
+    metadata:
+      labels:
+        app: sqlserver
+    spec:
+      containers:
+      - name: sqlserver
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+        - containerPort: 1433
+        env:
+        - name: ACCEPT_EULA
+          value: Y
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sqlserver-secret
+              key: PASS
+        - name: MSSQL_PID
+          value: Developer
+        volumeMounts:
+        - name: sqlserver-data
+          mountPath: /var/opt/mssql/data
+
+      volumes:
+      - name: sqlserver-data
+        hostPath:
+          path: /path/to/db-data/sqlserver
+```
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqlserver-service
+  namespace: n5-namespace
+spec:
+  selector:
+    app: sqlserver
+  ports:
+  - protocol: TCP
+    port: 1433
+    targetPort: 1433
+```
+
+- __Creamos el servicio de n5-challenge__
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: challenge-n5
+  namespace: n5-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: challenge-n5
+  template:
+    metadata:
+      labels:
+        app: challenge-n5
+    spec:
+      containers:
+      - name: challenge-n5
+        image: n5/pc-challenge:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: DBServer
+          value: sqlserver
+        - name: DBName
+          valueFrom:
+            configMapKeyRef:
+              name: sqlserver-configmap
+              key: DBNAME
+        - name: DBUser
+          valueFrom:
+            configMapKeyRef:
+              name: sqlserver-configmap
+              key: USER
+        - name: DBPassword
+          valueFrom:
+            secretKeyRef:
+              name: sqlserver-secret
+              key: PASS
+```
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: challenge-n5-service
+  namespace: n5-namespace
+spec:
+  selector:
+    app: challenge-n5
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+```
+
+- __Creamos el servicio de elastic search __
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elastic-search
+  namespace: n5-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elastic-search
+  template:
+    metadata:
+      labels:
+        app: elastic-search
+    spec:
+      containers:
+      - name: elastic-search
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.11.3
+        ports:
+        - containerPort: 9200
+        env:
+        - name: node.name
+          value: es01
+        - name: cluster.name
+          value: es-docker-cluster
+        - name: discovery.seed_hosts
+          value: es01
+        - name: cluster.initial_master_nodes
+          value: es01
+        - name: bootstrap.memory_lock
+          value: "true"
+        - name: ES_JAVA_OPTS
+          value: "-Xms512m -Xmx512m"
+        volumeMounts:
+        - name: elastic-search-data
+          mountPath: /usr/share/elasticsearch/data
+
+      volumes:
+      - name: elastic-search-data
+        hostPath:
+          path: /path/to/db-data/elastic
+```
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: elastic-search-service
+  namespace: n5-namespace
+spec:
+  selector:
+    app: elastic-search
+  ports:
+  - protocol: TCP
+    port: 9200
+    targetPort: 9200
+```
+
+- __Creamos el servicio de Kafka__
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka
+  namespace: n5-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+      - name: kafka
+        image: docker.io/bitnami/kafka:3.6
+        ports:
+        - containerPort: 9092
+        env:
+        - name: KAFKA_CFG_NODE_ID
+          value: "0"
+        - name: KAFKA_CFG_PROCESS_ROLES
+          value: "controller,broker"
+        - name: KAFKA_CFG_CONTROLLER_QUORUM_VOTERS
+          value: "0@kafka:9093"
+        - name: KAFKA_CFG_LISTENERS
+          value: "PLAINTEXT://:9092,CONTROLLER://:9093"
+        - name: KAFKA_CFG_ADVERTISED_LISTENERS
+          value: "PLAINTEXT://:9092"
+        - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
+          value: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT"
+        - name: KAFKA_CFG_CONTROLLER_LISTENER_NAMES
+          value: "CONTROLLER"
+        - name: KAFKA_CFG_INTER_BROKER_LISTENER_NAME
+          value: "PLAINTEXT"
+        volumeMounts:
+        - name: kafka-data
+          mountPath: /bitnami
+
+      volumes:
+      - name: kafka-data
+        hostPath:
+          path: /path/to/db-data/kafka
+```
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-service
+  namespace: n5-namespace
+spec:
+  selector:
+    app: kafka
+  ports:
+  - protocol: TCP
+    port: 9092
+    targetPort: 9092
+```
+
+### Mejoras a Kubernetes
+Se recomienda realizar las siguientes mejoras.
+- Crear un networkpoclicy al pod sqlserver que solamente acepte un ingress del pod challenge-n5.
+- Crear los persistent volumes y los persisten volumes claims. Definiendo espacio correctamente
+- En el pod challenge-n5, en la solucion definir un recurso por ejemplo health para que en la definición del pod configurar correctamente las propiedades readinessProbe y livenessProbe.
 
 
